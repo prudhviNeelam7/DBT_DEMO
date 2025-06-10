@@ -1,4 +1,3 @@
-select 
-* 
-from {{ source('demo', 'bike') }}
-limit 10
+with bike_data as (select * from {{ source("demo", "bike") }})
+select *
+from bike_data
