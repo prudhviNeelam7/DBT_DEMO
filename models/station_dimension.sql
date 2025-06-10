@@ -1,15 +1,13 @@
-{{
-    config(
-        materialized='table'
-    )
-}}
+{{ config(materialized="table") }}
 
-WITH BIKE AS (
-    SELECT 
-        START_STATION_ID as station_id,
-        START_STATION_NAME AS STATION_NAME,
-        START_STATION_LATITUDE AS STATION_LAT,
-        START_STATION_LONGITUDE AS STATION_LNG
-    FROM {{ source('demo', 'bike') }}
-    where START_STATION_ID != 'start station id'
-)SELECT * FROM BIKE
+with
+    bike as (
+        select
+            start_statio_id as station_id,
+            start_station_name as station_name,
+            start_station_latitude as station_lat,
+            start_station_longitude as station_lng
+        from {{ ref("stg_bike") }}
+    )
+select *
+from bike

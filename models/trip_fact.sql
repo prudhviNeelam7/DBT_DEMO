@@ -3,16 +3,15 @@
 with
     trip as (
         select
-            bikeid as rider_id,
-            usertype,
-            date(to_timestamp(start_time)) as trip_start_date,
-            start_station_id,
+            ride_id,
+            date(to_timestamp(started_at)) as trip_date,
+            START_STATIO_ID as START_STATION_ID,
             end_station_id,
+            member_csual,
             timestampdiff(
-                second, to_timestamp(start_time), to_timestamp(stop_time)
+                second, to_timestamp(started_at), to_timestamp(ended_at)
             ) as trip_duration_seconds
-        from {{ source("demo", "bike") }}
-        where trip_duration != 'tripduration'
+        from {{ ref("stg_bike") }}
     )
 select *
 from trip
