@@ -1,4 +1,4 @@
-{%macro input_date(x)%}
+{%macro season(x)%}
          case
                 when month(to_timestamp({{x}})) in (12, 1, 2)
                 then 'WINTER'
