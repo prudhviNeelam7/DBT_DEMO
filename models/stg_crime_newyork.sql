@@ -1,3 +1,5 @@
+{{ config(materialized='table') }}
+
 WITH CTE AS (
     SELECT *    FROM {{ source('uscrime', 'URBAN_CRIME_INCIDENT_LOG') }}
     WHERE CITY = 'New York' AND OFFENSE_CATEGORY IN ('Driving Under The Influence','Theft')
